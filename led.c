@@ -19,6 +19,7 @@ void welcome_screen(void) {
     init_screen(); 
     tinygl_text("Paper Scissors Rock"); 
     tinygl_text_mode_set(TINYGL_TEXT_MODE_SCROLL);
+    pacer_init (PACER_RATE);
     while(1)
     {
         pacer_wait();
@@ -30,7 +31,8 @@ void welcome_screen(void) {
 void paper_led(void) {
     tinygl_clear(); 
     init_screen(); 
-    tinygl_text("P"); 
+    tinygl_text("P");
+    pacer_init (PACER_RATE); 
     while(1)
     {
         pacer_wait();
