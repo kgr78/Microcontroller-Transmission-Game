@@ -11,12 +11,13 @@ int main (void)
     ir_uart_init ();
     int8_t sent = 0;
     int8_t received = 0;
-    if (navswitch_push_event_p(NAVSWITCH_PUSH)) {
-        ir_uart_putc ('?');
-        sent = 1;
-    }
-    while (1)
+
+    while (sent != 1 && received != 1)
     {
+        if (navswitch_push_event_p(NAVSWITCH_PUSH)) {
+            ir_uart_putc ('?');
+            sent = 1;
+        }
         if (ir_uart_read_ready_p ())
         {
             if (ir_uart_getc () == "?") {
@@ -24,4 +25,5 @@ int main (void)
             }
         }
     }
+    
 }
