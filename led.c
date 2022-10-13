@@ -7,6 +7,7 @@
 #define PACER_RATE 500
 #define MESSAGE_RATE 16
 
+//kahu
 void init_screen(void) {
     tinygl_init (PACER_RATE);
     tinygl_font_set (&font5x7_1);
