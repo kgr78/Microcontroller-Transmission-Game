@@ -5,7 +5,7 @@
 
 /* Sets the pacer rate and the message speed*/
 #define PACER_RATE 500
-#define MESSAGE_RATE 10
+#define MESSAGE_RATE 16
 
 void init_screen(void) {
     tinygl_init (PACER_RATE);
