@@ -2,8 +2,7 @@
 # Author: M. P. Hayes, UCECE
 # Date:   12 Sep 2010
 # Descr:  Makefile for game
-
-# Definitions.
+# Definitions (kahu).
 CC = avr-gcc
 CFLAGS = -mmcu=atmega32u2 -Os -Wall -Wstrict-prototypes -Wextra -g -I. -I../../utils -I../../fonts -I../../drivers -I../../drivers/avr
 OBJCOPY = avr-objcopy
@@ -16,7 +15,7 @@ all: game.out
 
 
 # Compile: create object files from C source files.
-game.o: game.c ../../drivers/avr/system.h ../../drivers/display.h ../../fonts/font5x7_1.h ../../utils/font.h ../../utils/pacer.h ../../utils/tinygl.h ../../assignment/final/led.h ../../drivers/navswitch.h ../../drivers/avr/usart1.h ../../drivers/avr/ir_uart.h ../../drivers/avr/timer0.h ../../drivers/avr/prescale.h
+game.o: game.c ../../drivers/avr/system.h ../../drivers/display.h ../../fonts/font5x7_1.h ../../utils/font.h ../../utils/pacer.h ../../utils/tinygl.h ../../assignment/final/led.h ../../drivers/navswitch.h ../../drivers/avr/usart1.h ../../drivers/avr/ir_uart.h ../../drivers/avr/timer0.h ../../drivers/avr/prescale.h 
 	$(CC) -c $(CFLAGS) $< -o $@
 
 system.o: ../../drivers/avr/system.c ../../drivers/avr/system.h
@@ -65,7 +64,7 @@ prescale.o: ../../drivers/avr/prescale.c ../../drivers/avr/prescale.h ../../driv
 
 
 # Link: create ELF output file from object files.
-game.out: game.o system.o led.o pio.o system.o timer.o display.o ledmat.o font.o pacer.o tinygl.o navswitch.o ir_uart.o timer0.o usart1.o prescale.o
+game.out: game.o system.o led.o pio.o system.o timer.o display.o ledmat.o font.o pacer.o tinygl.o navswitch.o ir_uart.o timer0.o usart1.o prescale.o 
 	$(CC) $(CFLAGS) $^ -o $@ -lm
 	$(SIZE) $@
 
