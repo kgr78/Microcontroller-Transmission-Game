@@ -20,55 +20,59 @@ static const pio_t cols[] =
 };
 
 
-static const uint8_t bitmap[] =
+static const uint8_t bitmap_rock[] =
 {
-
-    // 0x00, 
-    // 0x0C, 
-    // 0x12, 
-    // 0x12, 
-    // 0x0C
+    0x00, 
+    0x0C, 
+    0x12, 
+    0x12, 
+    0x0C
     // rock
-
-    
-    // 0x00,
-    // 0x1E,
-    // 0x1E,
-    // 0x1E,
-    // 0x00
+};
+static const uint8_t bitmap_paper[] =
+{    
+    0x00,
+    0x1E,
+    0x1E,
+    0x1E,
+    0x00
     // paper
-    
-
-    // 0x71,
-    // 0x72,
-    // 0x04,
-    // 0x72,
-    // 0x71
+};
+static const uint8_t bitmap_scissors[] =
+{
+    0x71,
+    0x72,
+    0x04,
+    0x72,
+    0x71
     // scissors
-
-
-    // 0x22,
-    // 0x14,
-    // 0x08,
-    // 0x14,
-    // 0x22
+};
+static const uint8_t bitmap_loss[] =
+{
+    0x22,
+    0x14,
+    0x08,
+    0x14,
+    0x22
     // X
-
-
-    // 0x10,
-    // 0x20,
-    // 0x10,
-    // 0x08,
-    // 0x04,
+};
+static const uint8_t bitmap_win[] =
+{
+    0x10,
+    0x20,
+    0x10,
+    0x08,
+    0x04,
     // tick
-
-    // 0x00,
-    // 0x08,
-    // 0x08,
-    // 0x08,
-    // 0x00
+};
+static const uint8_t bitmap_draw[] =
+{
+    0x00,
+    0x08,
+    0x08,
+    0x08,
+    0x00
     // dash
-
 };
 
 
@@ -95,7 +99,7 @@ static void display_column (uint8_t row_pattern, uint8_t current_column)
 }
 
 
-int main (void)
+int main (int8_t symbol)
 {
     uint8_t current_column = 0;
   
@@ -112,15 +116,68 @@ int main (void)
 
     while (1)
     {
-        pacer_wait ();
-        
-        display_column (bitmap[current_column], current_column);
-    
-        current_column++;
-    
-        if (current_column > (LEDMAT_COLS_NUM - 1))
-        {
-            current_column = 0;
-        }           
+        if (symbol == 1) {
+            pacer_wait ();
+            display_column (bitmap_paper[current_column], current_column);
+            current_column++;
+            if (current_column > (LEDMAT_COLS_NUM - 1))
+            {
+                current_column = 0;
+            }                       
+        }
+        if (symbol == 2) {
+            pacer_wait ();
+            display_column (bitmap_scissors[current_column], current_column);
+            current_column++;
+            if (current_column > (LEDMAT_COLS_NUM - 1))
+            {
+                current_column = 0;
+            }    
+        }
+        if (symbol == 3) {
+            pacer_wait ();
+            display_column (bitmap_scissors[current_column], current_column);
+            current_column++;
+            if (current_column > (LEDMAT_COLS_NUM - 1))
+            {
+                current_column = 0;
+            }    
+        }
+        if (symbol == 4) {
+            pacer_wait ();
+            display_column (bitmap_rock[current_column], current_column);
+            current_column++;
+            if (current_column > (LEDMAT_COLS_NUM - 1))
+            {
+                current_column = 0;
+            }    
+        }
+        if (symbol == 5) {
+            pacer_wait ();
+            display_column (bitmap_win[current_column], current_column);
+            current_column++;
+            if (current_column > (LEDMAT_COLS_NUM - 1))
+            {
+                current_column = 0;
+            }    
+        }
+        if (symbol == 6) {
+            pacer_wait ();
+            display_column (bitmap_loss[current_column], current_column);
+            current_column++;
+            if (current_column > (LEDMAT_COLS_NUM - 1))
+            {
+                current_column = 0;
+            }    
+        }
+        if (symbol == 7) {
+            pacer_wait ();
+            display_column (bitmap_draw[current_column], current_column);
+            current_column++;
+            if (current_column > (LEDMAT_COLS_NUM - 1))
+            {
+                current_column = 0;
+            }    
+        }
     }
 }
