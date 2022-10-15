@@ -6,6 +6,7 @@
 #include "player_choice.h"
 #include "led.h" 
 #include "decide_winner.h"
+#include <stdbool.h>
 
 
 #define PACER_RATE 500
@@ -35,12 +36,13 @@ char change_character(int8_t count) {
 void choose_character(void) {
     int8_t count = 0; 
     char character = change_character(count);
-    int8_t r_character; 
+    char recieved; 
+    char chosen = 0;
     init_screen(); 
     ir_uart_init ();
     navswitch_init ();
     pacer_init (PACER_RATE);
-    bool pushed = false; 
+
 
     while (1) 
     {
@@ -60,16 +62,16 @@ void choose_character(void) {
             }
         if (navswitch_push_event_p(NAVSWITCH_PUSH)) {
             ir_uart_putc(character);
-            pushed = true; 
+            chosen = character;
         }
-        if (ir_uart_read_ready_p() && pushed == true) {
-            r_character = ir_uart_getc();
-            if (r_character<127 && r_character>32) {
-                if (r_character == 'R' || r_character == 'P' || r_character == 'S') {
-                    result(r_character,character); 
-                } 
+        display_character (character);  
+        if (ir_uart_read_ready_p()) {
+            recieved = ir_uart_getc();
+            if ((recieved == 'R' || recieved == 'P' || recieved == 'S') && (chosen != 0)) {
+                ir_uart_putc(chosen);
+                result(recieved, chosen); 
             }
         }
-        display_character (character);   
+         
     } 
 }
