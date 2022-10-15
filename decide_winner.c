@@ -2,15 +2,13 @@
 #include "system.h"
 #include "led.h"
 
-int result(char recieved, char chosen) {
+void result(char recieved, char chosen) {
     int player1 = 1; 
     int winner;
     int player2 = 2; 
     int draw = 3; 
-    if (recieved == chosen) {
-        winner = draw; 
-        display_outcome(winner);  
-    } else if (recieved == 'R' && chosen == 'P') {
+ 
+    if (recieved == 'R' && chosen == 'P') {
         winner = player1; 
         display_outcome(winner); 
     } else if (recieved == 'R' && chosen == 'S') {
@@ -25,9 +23,11 @@ int result(char recieved, char chosen) {
     } else if (recieved == 'S' && chosen == 'R') {
         winner = player1;
         display_outcome(winner);  
-    } else {
+    } else if (recieved == 'S' && chosen == 'P'){
         winner = player2; 
         display_outcome(winner); 
-    }
-    return winner; 
+    } else if (recieved == chosen) {
+        winner = draw; 
+        display_outcome(winner); 
+    } 
 }

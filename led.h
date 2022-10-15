@@ -13,7 +13,7 @@
 void welcome_screen(void);
 void init_screen(void);  
 bool exit_welcome(void);  
-int display_outcome(int8_t symbol); 
+void display_outcome(int8_t symbol); 
  
 
 #endif

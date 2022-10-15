@@ -86,7 +86,7 @@ static void display_column (uint8_t row_pattern, uint8_t current_column) {
     pio_output_low (cols[current_column]);
 }
 
-int display_outcome(int8_t symbol) {
+void display_outcome(int8_t symbol) {
     if (symbol == 1) {
         tinygl_clear(); 
         init_screen(); 
@@ -97,6 +97,7 @@ int display_outcome(int8_t symbol) {
             pacer_wait();
             tinygl_update (); 
         }
+        tinygl_clear(); 
     }
     if (symbol == 2) {
         tinygl_clear(); 
@@ -108,6 +109,7 @@ int display_outcome(int8_t symbol) {
             pacer_wait();
             tinygl_update (); 
         }
+        tinygl_clear(); 
     }
     if (symbol == 3) {
         tinygl_clear(); 
@@ -119,5 +121,6 @@ int display_outcome(int8_t symbol) {
             pacer_wait();
             tinygl_update (); 
         } 
+        tinygl_clear();
     }
 }

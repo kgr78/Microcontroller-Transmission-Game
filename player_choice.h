@@ -10,7 +10,7 @@
 
 void display_character (char character); 
 char change_character(int8_t count); 
-int choose_character(void); 
+void choose_character(void); 
 
 
 #endif
