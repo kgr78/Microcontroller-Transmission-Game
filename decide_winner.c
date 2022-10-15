@@ -26,7 +26,13 @@ void result(char recieved, char chosen) {
     } else if (recieved == 'S' && chosen == 'P'){
         winner = player2; 
         display_outcome(winner); 
-    } else if (recieved == chosen) {
+    } else if (recieved == 'S' && chosen == 'S') {
+        winner = draw; 
+        display_outcome(winner); 
+    } else if (recieved == 'R' && chosen == 'R') {
+        winner = draw; 
+        display_outcome(winner); 
+    } else if (recieved == 'P' && chosen == 'P') {
         winner = draw; 
         display_outcome(winner); 
     } 
