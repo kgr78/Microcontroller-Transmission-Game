@@ -2,12 +2,16 @@
 #include "led.h"
 #include "navswitch.h"
 #include "ir_uart.h"
+#include "led_symbols.h"
+#include "player_choice.h"
 //kahu
 
 
 int main (void)
 {
-
+    system_init();
+    ir_uart_init();
+    choose_character();
     // system_init ();
     // ir_uart_init ();
     // int8_t sent = 0;
