@@ -133,3 +133,22 @@ void display_outcome(int8_t symbol) {
         tinygl_clear();
     }
 }
+
+void display_winner(int8_t winner_int,int8_t loser_int) {
+    tinygl_clear();
+    init_screen(); 
+    char end_score[100] = "W  ";   
+    end_score[3] = '2';  
+    tinygl_text(end_score); 
+    tinygl_text_mode_set(TINYGL_TEXT_MODE_SCROLL);
+    pacer_init (PACER_RATE);
+    while (1) {
+        pacer_wait();
+        tinygl_update (); 
+    }
+} 
+
+void display_loser(int8_t loser_int, int8_t winner_int) {
+
+}
+

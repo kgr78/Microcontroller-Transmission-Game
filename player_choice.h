@@ -11,6 +11,7 @@
 void display_character (char character); 
 char change_character(int8_t count); 
 void choose_character(void); 
+void final_outcome(int8_t player1, int8_t player2); 
 
 
 #endif

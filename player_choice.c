@@ -38,13 +38,14 @@ void choose_character(void) {
     char character = change_character(count);
     char recieved; 
     char chosen = 0;
+    int8_t player1 = 0, player2 = 0; 
     init_screen(); 
     ir_uart_init ();
     navswitch_init ();
     pacer_init (PACER_RATE);
 
 
-    while (1) 
+    while (count < 3) 
     {
         pacer_wait ();
         tinygl_update ();
@@ -69,8 +70,15 @@ void choose_character(void) {
             recieved = ir_uart_getc();
             if ((recieved == 'R' || recieved == 'P' || recieved == 'S') && (chosen != 0)) {
                 ir_uart_putc(chosen);
-                result(recieved, chosen); 
-                chosen = 0;
+                int winner = result(recieved, chosen); 
+                chosen = 0; 
+                if (winner == 1) {
+                    player1++;
+                    count++;  
+                } else if (winner == 2) {
+                    player2++; 
+                    count++; 
+                }
             }
         }
          
