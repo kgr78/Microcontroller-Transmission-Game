@@ -6,10 +6,13 @@
 #include "ir_uart.h"
 #include "navswitch.h"
 #include "pio.h"
+#include <stdbool.h>
+#include "player_choice.h"
+#include <time.h>
 
 /* Sets the pacer rate and the message speed*/
 #define PACER_RATE 500
-#define MESSAGE_RATE 16
+#define MESSAGE_RATE 13
 
 /** Define PIO pins driving LED matrix rows.  */
 static const pio_t rows[] =
@@ -37,34 +40,25 @@ void init_screen(void) {
 void welcome_screen(void) {
     tinygl_clear();
     init_screen(); 
-    bool exit = false; 
+    display_init();
+
+    // bool exit = false; 
     tinygl_text("Paper Scissors Rock"); 
     tinygl_text_mode_set(TINYGL_TEXT_MODE_SCROLL);
     pacer_init (PACER_RATE);
-    while (exit == false) {
-        if (navswitch_push_event_p(NAVSWITCH_PUSH)) {
-            tinygl_clear(); 
-            exit = true;
-        }
+    bool pushed = false;
+    while (!pushed) {
         pacer_wait();
+        navswitch_update();
         /* Calls the tinygl update function. */
         tinygl_update (); 
+        if (navswitch_push_event_p(NAVSWITCH_PUSH)) {
+            pushed = true;
+        }
     }
 }
 
-bool exit_welcome(void) {
-    navswitch_init ();
-    ir_uart_init ();
-    char recieved; 
-    bool exit = false; 
-    if (ir_uart_read_ready_p()) {
-        recieved = ir_uart_getc(); 
-    }
-    if (navswitch_push_event_p(NAVSWITCH_PUSH)) {
-            exit = true;
-    }
-    return exit; 
-}
+
 
 void paper_led(void) {
 
@@ -87,16 +81,22 @@ static void display_column (uint8_t row_pattern, uint8_t current_column) {
 }
 
 void display_outcome(int8_t symbol) {
+    tinygl_text_mode_set(TINYGL_TEXT_MODE_STEP);
     if (symbol == 1) {
         tinygl_clear(); 
         init_screen(); 
         tinygl_text("W");
         pacer_init (PACER_RATE); 
-        while(1)
+        bool pushed = false;
+        while (!pushed)
         {
             pacer_wait();
+            navswitch_update ();
             tinygl_update (); 
-        }
+            if (navswitch_push_event_p(NAVSWITCH_PUSH)) {
+                pushed = true;
+            }
+        } 
         tinygl_clear(); 
     }
     if (symbol == 2) {
@@ -104,11 +104,16 @@ void display_outcome(int8_t symbol) {
         init_screen(); 
         tinygl_text("L");
         pacer_init (PACER_RATE); 
-        while(1)
+        bool pushed = false;
+        while (!pushed)
         {
             pacer_wait();
+            navswitch_update ();
             tinygl_update (); 
-        }
+            if (navswitch_push_event_p(NAVSWITCH_PUSH)) {
+                pushed = true;
+            }
+        } 
         tinygl_clear(); 
     }
     if (symbol == 3) {
@@ -116,10 +121,15 @@ void display_outcome(int8_t symbol) {
         init_screen(); 
         tinygl_text("T");
         pacer_init (PACER_RATE); 
-        while(1)
+        bool pushed = false;
+        while (!pushed)
         {
             pacer_wait();
+            navswitch_update ();
             tinygl_update (); 
+            if (navswitch_push_event_p(NAVSWITCH_PUSH)) {
+                pushed = true;
+            }
         } 
         tinygl_clear();
     }
