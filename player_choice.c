@@ -70,6 +70,7 @@ void choose_character(void) {
             if ((recieved == 'R' || recieved == 'P' || recieved == 'S') && (chosen != 0)) {
                 ir_uart_putc(chosen);
                 result(recieved, chosen); 
+                chosen = 0;
             }
         }
          
