@@ -8,11 +8,10 @@
 #include "pio.h"
 #include <stdbool.h>
 #include "player_choice.h"
-#include <time.h>
 
 /* Sets the pacer rate and the message speed*/
 #define PACER_RATE 500
-#define MESSAGE_RATE 13
+#define MESSAGE_RATE 10
 
 /** Define PIO pins driving LED matrix rows.  */
 static const pio_t rows[] =
