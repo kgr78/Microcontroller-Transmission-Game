@@ -13,6 +13,4 @@ int main (void)
     ir_uart_init();
     welcome_screen();
     choose_character();
-
-    
 }
