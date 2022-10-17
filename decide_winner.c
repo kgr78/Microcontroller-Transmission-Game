@@ -2,7 +2,7 @@
 #include "system.h"
 #include "led.h"
 
-void result(char recieved, char chosen) {
+int result(char recieved, char chosen) {
     int player1 = 1; 
     int winner;
     int player2 = 2; 
@@ -36,4 +36,5 @@ void result(char recieved, char chosen) {
         winner = draw; 
         display_outcome(winner); 
     } 
+    return winner; 
 }

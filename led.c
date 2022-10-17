@@ -37,11 +37,8 @@ void init_screen(void) {
 }
 
 void welcome_screen(void) {
-    tinygl_clear();
     init_screen(); 
     display_init();
-
-    // bool exit = false; 
     tinygl_text("Paper Scissors Rock"); 
     tinygl_text_mode_set(TINYGL_TEXT_MODE_SCROLL);
     pacer_init (PACER_RATE);
@@ -49,18 +46,11 @@ void welcome_screen(void) {
     while (!pushed) {
         pacer_wait();
         navswitch_update();
-        /* Calls the tinygl update function. */
-        tinygl_update (); 
         if (navswitch_push_event_p(NAVSWITCH_PUSH)) {
             pushed = true;
         }
+        tinygl_update ();
     }
-}
-
-
-
-void paper_led(void) {
-
 }
 
 static void display_column (uint8_t row_pattern, uint8_t current_column) {
@@ -82,7 +72,6 @@ static void display_column (uint8_t row_pattern, uint8_t current_column) {
 void display_outcome(int8_t symbol) {
     tinygl_text_mode_set(TINYGL_TEXT_MODE_STEP);
     if (symbol == 1) {
-        tinygl_clear(); 
         init_screen(); 
         tinygl_text("W");
         pacer_init (PACER_RATE); 
@@ -91,15 +80,14 @@ void display_outcome(int8_t symbol) {
         {
             pacer_wait();
             navswitch_update ();
-            tinygl_update (); 
             if (navswitch_push_event_p(NAVSWITCH_PUSH)) {
                 pushed = true;
             }
+
+            tinygl_update (); 
         } 
-        tinygl_clear(); 
     }
     if (symbol == 2) {
-        tinygl_clear(); 
         init_screen(); 
         tinygl_text("L");
         pacer_init (PACER_RATE); 
@@ -108,15 +96,14 @@ void display_outcome(int8_t symbol) {
         {
             pacer_wait();
             navswitch_update ();
-            tinygl_update (); 
             if (navswitch_push_event_p(NAVSWITCH_PUSH)) {
                 pushed = true;
             }
+            
+            tinygl_update (); 
         } 
-        tinygl_clear(); 
     }
     if (symbol == 3) {
-        tinygl_clear(); 
         init_screen(); 
         tinygl_text("T");
         pacer_init (PACER_RATE); 
@@ -125,30 +112,95 @@ void display_outcome(int8_t symbol) {
         {
             pacer_wait();
             navswitch_update ();
-            tinygl_update (); 
             if (navswitch_push_event_p(NAVSWITCH_PUSH)) {
                 pushed = true;
             }
+            
+            tinygl_update (); 
         } 
-        tinygl_clear();
     }
 }
 
 void display_winner(int8_t winner_int,int8_t loser_int) {
     tinygl_clear();
     init_screen(); 
-    char end_score[100] = "W  ";   
-    end_score[3] = '2';  
+    display_init();
+    tinygl_text("Winner!"); 
+    tinygl_text_mode_set(TINYGL_TEXT_MODE_SCROLL);
+    pacer_init (PACER_RATE);
+    bool pushed = false;
+    while (!pushed) {
+        pacer_wait();
+        navswitch_update();
+        /* Calls the tinygl update function. */
+        
+        if (navswitch_push_event_p(NAVSWITCH_PUSH)) {
+            pushed = true;
+        }
+        tinygl_update (); 
+        
+    }
+
+    pushed = false; 
+    char end_score[100] = "Score:    ";   
+    winner_int = '0' + winner_int;
+    loser_int = '0' + loser_int; 
+    end_score[6] = winner_int;  
+    end_score[7] = '-'; 
+    end_score[8] = loser_int; 
     tinygl_text(end_score); 
     tinygl_text_mode_set(TINYGL_TEXT_MODE_SCROLL);
     pacer_init (PACER_RATE);
-    while (1) {
+        while (!pushed) {
         pacer_wait();
+        navswitch_update();
+        if (navswitch_push_event_p(NAVSWITCH_PUSH)) {
+            pushed = true;
+        }
         tinygl_update (); 
+        
     }
 } 
 
 void display_loser(int8_t loser_int, int8_t winner_int) {
+    tinygl_clear();
+    init_screen(); 
+    display_init();
+    tinygl_text("Loser :("); 
+    tinygl_text_mode_set(TINYGL_TEXT_MODE_SCROLL);
+    pacer_init (PACER_RATE);
+    bool pushed = false;
+    while (!pushed) {
+        pacer_wait();
+        navswitch_update();
+        /* Calls the tinygl update function. */
+        
+        if (navswitch_push_event_p(NAVSWITCH_PUSH)) {
+            pushed = true;
 
+        }
+        
+        tinygl_update (); 
+    }
+
+    pushed = false; 
+    char end_score[100] = "Score:    ";   
+    winner_int = '0' + winner_int;
+    loser_int = '0' + loser_int; 
+    end_score[6] = winner_int;  
+    end_score[7] = '-'; 
+    end_score[8] = loser_int; 
+    tinygl_text(end_score); 
+    tinygl_text_mode_set(TINYGL_TEXT_MODE_SCROLL);
+    pacer_init (PACER_RATE);
+        while (!pushed) {
+        pacer_wait();
+        navswitch_update();
+        if (navswitch_push_event_p(NAVSWITCH_PUSH)) {
+            pushed = true;
+        }
+        
+        tinygl_update (); 
+    }
 }
 

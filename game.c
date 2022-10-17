@@ -9,8 +9,11 @@
 
 int main (void)
 {
-    system_init();
-    ir_uart_init();
-    welcome_screen();
-    choose_character();
+    while (1)
+    {
+        system_init();
+        ir_uart_init(); 
+        welcome_screen(); 
+        choose_character(); 
+    }
 }

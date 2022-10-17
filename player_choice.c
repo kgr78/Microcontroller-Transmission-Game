@@ -32,7 +32,6 @@ char change_character(int8_t count) {
     }
     return character; 
 }
-
 void choose_character(void) {
     int8_t count = 0; 
     char character = change_character(count);
@@ -45,10 +44,10 @@ void choose_character(void) {
     pacer_init (PACER_RATE);
 
 
-    while (count < 3) 
+    while (player1 < 3 && player2 < 3) 
     {
         pacer_wait ();
-        tinygl_update ();
+        
         navswitch_update ();
 
         if (navswitch_push_event_p (NAVSWITCH_NORTH))
@@ -74,13 +73,27 @@ void choose_character(void) {
                 chosen = 0; 
                 if (winner == 1) {
                     player1++;
-                    count++;  
                 } else if (winner == 2) {
                     player2++; 
-                    count++; 
                 }
             }
         }
+        tinygl_update ();
          
-    } 
+    }
+    int8_t player21 = player1;
+    int8_t player22 = player2;
+    player1 = 0; 
+    player2 = 0; 
+    count = 0; 
+    chosen = 0; 
+    final_outcome(player21,player22); 
+}
+
+void final_outcome(int8_t player1, int8_t player2) {
+    if (player1>player2) {
+        display_winner(player1,player2); 
+    } else {
+        display_loser(player1,player2); 
+    }
 }

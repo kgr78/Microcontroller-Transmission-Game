@@ -5,7 +5,7 @@
 #include "system.h"
 #include "led.h"
 
-void result(char recieved, char chosen); 
+int result(char recieved, char chosen); 
 
 
 #endif
