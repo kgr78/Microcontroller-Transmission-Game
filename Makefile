@@ -1,8 +1,8 @@
 # File:   Makefile
-# Author: M. P. Hayes, UCECE
+# Author: k. griffin & C. parsons
 # Date:   12 Sep 2010
 # Descr:  Makefile for game
-# Definitions (kahu).
+
 CC = avr-gcc
 CFLAGS = -mmcu=atmega32u2 -Os -Wall -Wstrict-prototypes -Wextra -g -I. -I../../utils -I../../fonts -I../../drivers -I../../drivers/avr
 OBJCOPY = avr-objcopy
