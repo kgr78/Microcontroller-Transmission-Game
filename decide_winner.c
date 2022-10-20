@@ -11,7 +11,7 @@
 int result(char recieved, char chosen) {
     /*initialises values*/
     int player1 = 1; 
-    int winner;
+    int8_t winner = 0;
     int player2 = 2; 
     int draw = 3; 
     
